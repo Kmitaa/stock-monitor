@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Stock Monitor AI
 
-## Getting Started
+Interactive market dashboard that combines live charts, headline feeds, and AI-generated market context in one place.
 
-First, run the development server:
+## Why this project
+
+`Stock Monitor AI` is built to quickly answer one practical question:
+"What is happening on this market right now and how do recent headlines match the current price action?"
+
+The app pulls market data and news, then generates a compact AI summary for logged-in users.
+
+## Key features
+
+- Live chart view (TradingView widget) for selected markets
+- Fast market switching (gold, silver, BTC, ETH)
+- Headline feed per market (Yahoo Finance source)
+- AI analysis block (news + quote context) for authenticated users
+- Side terminals for FX and crypto tickers vs USD
+- Email/password auth flow with verification support
+
+## Tech stack
+
+- Next.js 16 (App Router)
+- React 19 + TypeScript
+- NextAuth.js
+- Prisma ORM
+- SQLite (local default) / configurable `DATABASE_URL`
+- OpenAI API (analysis)
+- Yahoo Finance API wrapper
+- Tailwind CSS 4
+
+## Screenshots
+
+Add your app screenshots to `docs/screenshots/` and they will render in this section automatically once committed.
+
+![Main terminal](docs/screenshots/main-terminal.png)
+![AI analysis](docs/screenshots/ai-analysis.png)
+![Register flow](docs/screenshots/register-flow.png)
+
+Suggested captures:
+- Main dashboard with chart + side terminals
+- AI analysis card after login
+- Register or login screen
+
+## Quick start
+
+1) Install dependencies:
+
+```bash
+npm install
+```
+
+2) Create env file:
+
+```bash
+cp environment.example .env.local
+```
+
+3) Run Prisma migration (if needed):
+
+```bash
+npx prisma migrate dev
+```
+
+4) Start development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Use `environment.example` as the source of truth.
 
-## Learn More
+Most important variables:
+- `DATABASE_URL`
+- `NEXTAUTH_SECRET`
+- `NEXTAUTH_URL`
+- `RESEND_API_KEY` (optional for production email sending)
+- `OPENAI_API_KEY`
 
-To learn more about Next.js, take a look at the following resources:
+## NPM scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `npm run dev` - run development server
+- `npm run build` - build production bundle
+- `npm run start` - start production server
+- `npm run lint` - run ESLint
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Notes
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Local secret files (for example `.env.local`) are ignored by git.
+- AI output is informational only and not investment advice.

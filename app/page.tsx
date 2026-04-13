@@ -76,6 +76,12 @@ function renderInlineBold(text: string): React.ReactNode[] {
   });
 }
 
+function maskEmail(email: string): string {
+  const visible = email.slice(0, 4);
+  const hiddenLength = Math.max(email.length - 4, 0);
+  return `${visible}${'*'.repeat(hiddenLength)}`;
+}
+
 export default function MarketTerminal() {
   const { data: session, status: sessionStatus } = useSession();
   const isLoggedIn = sessionStatus === 'authenticated';
@@ -288,7 +294,9 @@ export default function MarketTerminal() {
             </div>
             <div className="flex flex-col items-end gap-1">
               {isLoggedIn && session?.user?.email ? (
-                <p className="text-[9px] font-mono text-gray-500 max-w-[14rem] truncate text-right">{session.user.email}</p>
+                <p className="text-[9px] font-mono text-gray-500 max-w-[14rem] truncate text-right">
+                  {maskEmail(session.user.email)}
+                </p>
               ) : null}
               {isLoggedIn ? (
                 <button
@@ -498,7 +506,7 @@ export default function MarketTerminal() {
             <p className="text-gray-400 text-sm leading-relaxed">
               This combines Yahoo headlines ({cfg.yahooSymbol}) with Yahoo quote and candle data. Not investment advice.
               {isLoggedIn ? (
-                <> Signed in as {session?.user?.email ?? 'user'}.</>
+                <> Signed in as {session?.user?.email ? maskEmail(session.user.email) : 'user'}.</>
               ) : (
                 <>
                   {' '}
