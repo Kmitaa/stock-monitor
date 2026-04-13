@@ -1,0 +1,26 @@
+# Copy to `.env.local` (Next.js). Without DATABASE_URL the app defaults to SQLite: prisma/dev.db
+#
+# Both paths point at the same file (project root vs prisma/):
+# - Next / this repo:  file:./prisma/dev.db
+# - `npx prisma migrate` from prisma/:  file:./dev.db
+
+#DATABASE_URL="file:./prisma/dev.db"
+
+# Generate: openssl rand -base64 32
+#NEXTAUTH_SECRET="change-me"
+#NEXTAUTH_URL="http://localhost:3000"
+
+# --- Verification email (Resend, https://resend.com ) ---
+# 1. Create account, API key (API Keys).
+# 2. Set RESEND_API_KEY below.
+# 3. EMAIL_FROM — optional:
+#    - Default in code: Market Monitor AI <onboarding@resend.dev>
+#      (sandbox sender; often you can only email the address on the Resend account.)
+#    - Production: add your domain in Resend (Domains), verify DNS,
+#      then e.g. EMAIL_FROM="Market Monitor AI <noreply@yourdomain.com>"
+#
+#RESEND_API_KEY="re_a..."
+# EMAIL_FROM="Market Monitor AI <onboarding@resend.dev>"
+
+# OpenAI (AI analysis)
+# OPENAI_API_KEY="sk-..."
